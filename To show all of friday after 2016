@@ -1,0 +1,129 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace all_friday
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int day, month, year, y, m, d, B, mod7, day1 = 1, month1 = 1, year1 = 2016; // For checking days, mounths, and years.
+            string namemonth="January";
+            do
+            {
+                do
+                {
+                    Console.WriteLine("Please enter day to be between 1 and 31:");
+                    day = Convert.ToInt32(Console.ReadLine());
+
+                }
+                while (day <= 0 || day > 31); // Day can not be smaller than or equal zero and can not be bigger then 31
+
+                do
+                {
+                    Console.WriteLine("Please enter month to be between 1 and 12:");
+                    month = Convert.ToInt32(Console.ReadLine());
+                }
+                while (month > 12 || month <= 0); // Month can not be smaller than or equal zero and can not be bigger then 12
+
+                do
+                {
+                    Console.WriteLine("Please enter year to be equal 2016 or large from the 2016:");
+                    year = Convert.ToInt32(Console.ReadLine());
+                }
+                while (year < 2016);// our beginning time is 2016 so can not be smaller than 2016.
+
+                if ((month == 2 && day > 29) || (month == 4 && day > 30) || (month == 6 && day > 30) || (month == 9 && day > 30) || (month == 11 && day > 30))
+                { Console.WriteLine("İnvalid day"); } // This is extra control.
+                else if ((month == 2) && day > 28 && ((year % 4 == 1) || (year % 4 == 2) || (year % 4 == 3)))
+                { Console.WriteLine("İnvalid day"); }
+            }
+
+            while ((month == 2 && day > 29) || (month == 4 && day > 30) || (month == 6 && day > 30) || (month == 9 && day > 30) || (month == 11 && day > 30) || (month == 2) && (day > 28) && (year % 4 != 0));
+
+           
+            y = year - 2016;  // My program firstly checks year. and then check months and days.
+            m = month - 1;
+            d = day - 1;
+            mod7 = day % 7; // For finding mod.
+            B = ((day - mod7) / 7); // For finding "bölüm?" 
+            int loop4 = 1; // For clearly running year loop.
+
+            for (int loop1 = 1; loop1 <= y * 12; loop4++) // For year, every year have 12 month
+            {
+
+                if ((month1 == 1 || month1 == 3 || month1 == 5 || month1 == 7 || month1 == 8 || month1 == 10) && day1 > 31)//for passing the other month according to days
+                { day1 = Math.Abs(31 - day1); month1++; if (day1 == 0) day1++; loop1++; }  // 'if' for the lack of zero of the day 
+                else if ((month1 == 4 || month1 == 6 || month1 == 9 || month1 == 11) && day1 > 30)
+                { day1 = Math.Abs(30 - day1); month1++; if (day1 == 0) day1++; loop1++; }
+                else if ((month1 == 2) && year1 % 4 == 0 && day1 > 29)
+                { day1 = Math.Abs(29 - day1); month1++; if (day1 == 0)day1++; loop1++; }
+                else if ((month1 == 2) && day1 > 28)
+                { day1 = Math.Abs(28 - day1); month1++; if (day1 == 0)day1++; loop1++; }
+                else if (month1 == 12 && day1 > 31)
+                { day1 = Math.Abs(31 - day1); month1 = 1; year1++; if (day1 == 0) day1++; loop1++; }
+
+            if (month1 == 1){namemonth = "January";}if (month1 == 2){namemonth = "February";}if (month1 == 3){ namemonth = "March";}if (month1 == 4){ namemonth = "April";}
+            if (month1 == 5){ namemonth = "May";}if (month1 == 6) { namemonth = "June";}if (month1 == 7){ namemonth = "July";}if (month1 == 8) { namemonth = "August"; }
+            if (month1 == 9){ namemonth = "September";}if (month1 == 10){ namemonth = "October";}if (month1 == 11) { namemonth = "November";} if (month1 == 12){ namemonth = "December";}
+
+                Console.WriteLine(day1 + "  " + namemonth + " " + year1);
+                day1 += 7;
+                if ((month1 == month) && day1 >= day && year1 == year)
+                { break; }
+                
+            }
+            month1 = 1;
+            int loop5 = 1;
+            
+            for (int loop2 = 1; loop2 <= m; loop5++)// for month
+            {
+                while (loop2 <= month)
+                {
+                    if ((month1 == 1 || month1 == 3 || month1 == 5 || month1 == 7 || month1 == 8 || month1 == 10) && day1 > 31) //for passing the other month according to days
+                    { day1 = Math.Abs(31 - day1); month1 += 1; if (day1 == 0)day1++; loop2++; }
+                    else if ((month1 == 4 || month1 == 6 || month1 == 9 || month1 == 11) && day1 > 30)
+                    { day1 = Math.Abs(30 - day1); month1 += 1; if (day1 == 0)day1++; loop2++; }
+                    else if ((month1 == 2) && day1 > 29 && year1 % 4 == 0)
+                    { day1 = Math.Abs(29 - day1); month1 += 1; if (day1 == 0)day1++; loop2++; }
+                    else if ((month1 == 2) && day1 > 28)
+                    { day1 = Math.Abs(28 - day1); month1 += 1; if (day1 == 0)day1++; loop2++; }
+                    else if (month1 == 12 && day1 > 31)
+                    { day1 = Math.Abs(31 - day1); month1 = 1; if (day1 == 0) day1++; loop2++; year1++; }
+
+                    if (month1 == 1) { namemonth = "January"; } if (month1 == 2) { namemonth = "February"; } if (month1 == 3) { namemonth = "March"; } if (month1 == 4) { namemonth = "April"; }
+                    if (month1 == 5) { namemonth = "May"; } if (month1 == 6) { namemonth = "June"; } if (month1 == 7) { namemonth = "July"; } if (month1 == 8) { namemonth = "August"; }
+                    if (month1 == 9) { namemonth = "September"; } if (month1 == 10) { namemonth = "October"; } if (month1 == 11) { namemonth = "November"; } if (month1 == 12) { namemonth = "December"; }
+                    
+                    Console.WriteLine(day1 + "  " + namemonth + " " + year1);
+                    day1 += 7;
+                    if (month == month1 && day1 > day)
+                    { loop2++; }
+                    if ((month1 == month) && day1 >= day && year1 == year)
+                    { break; }
+
+                }
+            }
+
+            if (month <= 1 && day <= 31)//for just 2016-january.
+            {
+                for (int loop3 = 0; loop3 <= B; loop3++)//for day
+                {
+                    
+                    if (day1 > 31)//for passing the other month according to days
+                    { day1 = Math.Abs(31 - day1); month1 += 1; if (day1 == 0)day1++; loop3++; }
+                 
+                    if (month1 == 1) { namemonth = "January"; } 
+                    
+                    Console.WriteLine(day1 + "  " + namemonth + " " + year1);
+                        day1 += 7;
+
+                }
+            }
+
+            
+        }
+    }
+}
