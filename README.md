@@ -1,2 +1,1 @@
-# c#-homework
-These are my homework.
+# Show all specific days
